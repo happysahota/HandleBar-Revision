@@ -16,6 +16,8 @@
                     <li> {{entity}}
                 {{/each}}
             </ol>
+            
+            {{{ details }}}
         </script>
         <script type="text/javascript">
 
@@ -28,11 +30,15 @@
             //SECOND APPROACH
             var rawTemplate = document.getElementById("listTemplate").innerHTML;
             var template = Handlebars.compile(rawTemplate);;
-            var html = template({'title':"Students", 'entities':[
-                {'entity':"Harpreet"},
-                {'entity':"Bhawna"},
-                {'entity':"Prashant"},
-            ]})
+            var html = template({
+                'title':"Students",
+                'entities':[
+                    {'entity':"Harpreet"},
+                    {'entity':"Bhawna"},
+                    {'entity':"Prashant"},
+                ],
+                'details': "<i>This text is inside tag inside provide data json</i>"
+            })
 
             document.getElementById('listData').innerHTML += html;
         </script>
