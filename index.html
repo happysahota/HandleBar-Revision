@@ -93,6 +93,19 @@
                 Sri Lanka
                 Nepal
             {{/checkboxGenerator}}
+
+            {{#isEqual 1 1}}
+                yes Equal.
+            {{else}}
+                Not Really equal
+            {{/isEqual}}
+<br/>
+            {{#isEqual 1 2}}
+                yes Equal.
+            {{else}}
+                Not Really equal
+            {{/isEqual}}
+
         </script>
         <script type="text/javascript">
             Handlebars.registerHelper("checkboxGenerator", (name, options) => {
@@ -107,6 +120,14 @@
                     chkBoxes += "<input type='checkbox' value='"+value+"' name='"+name+"[]'>: "+value+"<br/>";
                 }
                 return chkBoxes;
+            });
+
+            Handlebars.registerHelper("isEqual", (val1, val2, options) => {
+                if(val1 === val2) {
+                    return options.fn(this);
+                }else{
+                    return options.inverse(this);
+                }
             });
 
             var templateHtml = document.getElementById('blockTemplate').innerHTML;
