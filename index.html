@@ -9,6 +9,9 @@
         <div id="testData"></div>
         <div id="listData"></div>
 
+        <!-- Block Helper Section -->
+        <div id="blockData"></div>
+
         <script type="text/x-handlebars-template" id="listTemplate">
             <h1>{{title}}</h1>
             <ol>
@@ -80,6 +83,37 @@
             });
 
             document.getElementById('listData').innerHTML += html;
+        </script>
+
+        
+        <script type="text/x-handlebars-template" id="blockTemplate">
+            {{#checkboxGenerator "checker"}}
+                India
+                Pakistan
+                Sri Lanka
+                Nepal
+            {{/checkboxGenerator}}
+        </script>
+        <script type="text/javascript">
+            Handlebars.registerHelper("checkboxGenerator", (name, options) => {
+                name = Handlebars.escapeExpression(name);
+                var values =options.fn();
+                values = values.trim().split('\n')
+                
+                var chkBoxes = "";
+                for(var val in values) {
+                    value = values[val].trim();
+
+                    chkBoxes += "<input type='checkbox' value='"+value+"' name='"+name+"[]'>: "+value+"<br/>";
+                }
+                return chkBoxes;
+            });
+
+            var templateHtml = document.getElementById('blockTemplate').innerHTML;
+            var template = Handlebars.compile(templateHtml);
+            html =template({});
+            document.getElementById('blockData').innerHTML += html;
+
         </script>
 
     </body>
