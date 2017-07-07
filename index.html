@@ -24,6 +24,10 @@
             {{styleSetter "this is demo text for Italic" style='i'}}
             <br/><br/>
             {{styleSetter "this is demo text for Bold" style='b'}}
+            <br/><br/>
+            {{AuthorName}}
+
+
 
         </script>
         <script type="text/javascript">
@@ -56,16 +60,24 @@
 
             });
 
+            Handlebars.registerHelper("AuthorName", (options) => {
+                return new Handlebars.SafeString("<h5>"+options.data.authorname+"</h5>");
+            });
+
             var template = Handlebars.compile(rawTemplate);;
             var html = template({
                 'title':"Students",
                 'entities':[
                     {'entity':"Harpreet"},
                     {'entity':"Bhawna"},
-                    {'entity':"Prashant"},
+                    {'entity':"Prashant"}
                 ],
                 'details': "<i>This text is inside tag inside provide data json</i>"
-            })
+            },{ 
+                'data':{
+                    'authorname':'Harpreet'
+                }
+            });
 
             document.getElementById('listData').innerHTML += html;
         </script>
