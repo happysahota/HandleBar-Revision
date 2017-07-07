@@ -20,6 +20,11 @@
             {{{ details }}}
             <br/><br/>
             {{linkhelper "Link Text" "http://link.com"}}
+            <br/><br/>
+            {{styleSetter "this is demo text for Italic" style='i'}}
+            <br/><br/>
+            {{styleSetter "this is demo text for Bold" style='b'}}
+
         </script>
         <script type="text/javascript">
 
@@ -38,6 +43,17 @@
 
                 var anchor = "<a href='"+link+"'>"+text+"</a>";
                 return new Handlebars.SafeString(anchor);
+            });
+
+            Handlebars.registerHelper("styleSetter", (text, options) => {
+                text = Handlebars.Utils.escapeExpression(text);
+
+                if(options.hash.style == 'i') {
+                    return new Handlebars.SafeString("<i>"+text+'</i>');
+                }else if(options.hash.style == 'b') {
+                    return new Handlebars.SafeString("<b>"+text+'</b>');                    
+                }
+
             });
 
             var template = Handlebars.compile(rawTemplate);;
