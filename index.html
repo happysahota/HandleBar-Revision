@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>::HandleBars::</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+    </head>
+    <body>
+
+        <div id="testData"></div>
+        <div id="listData"></div>
+
+        <script type="text/x-handlebars-template" id="listTemplate">
+            <h1>{{title}}</h1>
+            <ol>
+                {{#each entities}}
+                    <li> {{entity}}
+                {{/each}}
+            </ol>
+        </script>
+        <script type="text/javascript">
+
+            //FIRST APPROACH
+            var textTemplate = "<p>My name is {{lastname}}, {{firstname}} {{lastname}}</p>";
+            var template = Handlebars.compile(textTemplate);
+            var htmldata = template({'firstname':'Harpreet', 'lastname':'Singh'});
+            document.getElementById("testData").innerHTML +=htmldata;
+
+            //SECOND APPROACH
+            var rawTemplate = document.getElementById("listTemplate").innerHTML;
+            var template = Handlebars.compile(rawTemplate);;
+            var html = template({'title':"Students", 'entities':[
+                {'entity':"Harpreet"},
+                {'entity':"Bhawna"},
+                {'entity':"Prashant"},
+            ]})
+
+            document.getElementById('listData').innerHTML += html;
+        </script>
+
+    </body>
+</html>
