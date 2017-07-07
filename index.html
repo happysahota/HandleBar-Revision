@@ -18,6 +18,8 @@
             </ol>
             
             {{{ details }}}
+            <br/><br/>
+            {{linkhelper "Link Text" "http://link.com"}}
         </script>
         <script type="text/javascript">
 
@@ -29,6 +31,15 @@
 
             //SECOND APPROACH
             var rawTemplate = document.getElementById("listTemplate").innerHTML;
+
+            Handlebars.registerHelper("linkhelper", (text, link)=>{
+                text = Handlebars.Utils.escapeExpression(text);
+                link = Handlebars.Utils.escapeExpression(link);
+
+                var anchor = "<a href='"+link+"'>"+text+"</a>";
+                return new Handlebars.SafeString(anchor);
+            });
+
             var template = Handlebars.compile(rawTemplate);;
             var html = template({
                 'title':"Students",
