@@ -106,6 +106,18 @@
                 Not Really equal
             {{/isEqual}}
 
+            <br/><br/>
+            {{name}}<br/>
+            {{hobbies.lang}}<br/>
+            {{hobbies.game}}<br/><br/><br/>
+            {{name}}<br/>
+            {{#with hobbies}}
+                {{lang}}<br/>
+                {{game}}<br/>
+            {{/with}}
+
+
+
         </script>
         <script type="text/javascript">
             Handlebars.registerHelper("checkboxGenerator", (name, options) => {
@@ -129,10 +141,19 @@
                     return options.inverse(this);
                 }
             });
+            Handlebars.registerHelper("with", (context, options)=>{
+                return options.fn(context);
+            });
 
             var templateHtml = document.getElementById('blockTemplate').innerHTML;
             var template = Handlebars.compile(templateHtml);
-            html =template({});
+            html =template({
+                'name': "Happy",
+                'hobbies': {
+                    'lang':'JS',
+                    'game': 'Tennis'
+                }
+            });
             document.getElementById('blockData').innerHTML += html;
 
         </script>
