@@ -116,8 +116,17 @@
                 {{game}}<br/>
             {{/with}}
 
-
-
+            -----------
+<br/>
+            {{> printTitle}}
+            {{> printAuthor tagname='h2'}}
+            {{> printText tagname='h4'}}
+            <div style="padding-left: 50px">
+                {{#each sections}}
+                    {{> printAuthor tagname='h2'}}
+                    {{> printText tagname='h4'}}
+                {{/each}}
+            </div>
         </script>
         <script type="text/javascript">
             Handlebars.registerHelper("checkboxGenerator", (name, options) => {
@@ -145,6 +154,10 @@
                 return options.fn(context);
             });
 
+            Handlebars.registerPartial("printTitle", '{{title}}');
+            Handlebars.registerPartial("printAuthor", '<{{tagname}}>{{author}}</{{tagname}}>');
+            Handlebars.registerPartial("printText", '<{{tagname}}>{{text}}</{{tagname}}>');
+
             var templateHtml = document.getElementById('blockTemplate').innerHTML;
             var template = Handlebars.compile(templateHtml);
             html =template({
@@ -152,7 +165,23 @@
                 'hobbies': {
                     'lang':'JS',
                     'game': 'Tennis'
-                }
+                },
+                'title':'Partial section',
+                'author': "Random",
+                'text': "About random things",
+                "sections": [
+                    {
+                        'author': "Random 1",
+                        'text': "About 1 random thing"
+                    },{
+                        'author': "Random 2",
+                        'text': "About 2 random thing"
+                    },{
+                        'author': "Random 3",
+                        'text': "About 3 random thing"
+                    }
+                ]
+                
             });
             document.getElementById('blockData').innerHTML += html;
 
